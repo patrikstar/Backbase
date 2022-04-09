@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -39,6 +40,10 @@ android {
             isMinifyEnabled = true
             buildConfigField("boolean", "LOG_ENABLE", "true")
         }
+    }
+
+    lint {
+        isAbortOnError = false
     }
 
     buildFeatures {
