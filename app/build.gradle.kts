@@ -78,6 +78,9 @@ dependencies {
 
     implementation(Libs.timber)
 
+    implementation(Libs.Navigation.fragment_ktx)
+    implementation(Libs.Navigation.ui_ktx)
+
     testImplementation(Libs.Test.junit4)
     testImplementation(Libs.Test.mockk)
     testImplementation(Libs.Test.coroutines)

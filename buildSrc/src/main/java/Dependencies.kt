@@ -41,6 +41,12 @@ object Libs {
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
 
+    object Navigation {
+        const val version = "2.4.1"
+        const val fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$version"
+        const val ui_ktx = "androidx.navigation:navigation-ui-ktx:$version"
+    }
+
     const val material = "com.google.android.material:material:1.2.1"
 
     const val materialDialog = "com.afollestad.material-dialogs:core:3.1.1"
