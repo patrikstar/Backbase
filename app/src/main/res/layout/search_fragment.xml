@@ -17,12 +17,6 @@
         android:lines="1"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
-        android:id="@+id/btTest"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"
