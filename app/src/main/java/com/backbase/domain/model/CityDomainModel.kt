@@ -11,4 +11,4 @@ data class CityDomainModel(
     val id: Int,
     val latitude: Float,
     val longitude: Float
-): Parcelable
+) : Parcelable

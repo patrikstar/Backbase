@@ -6,5 +6,5 @@ import com.backbase.domain.repository.DomainRepository
 import org.koin.dsl.module
 
 val domainModule = module {
-    single<DomainRepository> {DomainRepositoryImpl(get<DataRepository>())}
+    single<DomainRepository> { DomainRepositoryImpl(get<DataRepository>()) }
 }
