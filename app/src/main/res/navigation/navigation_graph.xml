@@ -25,7 +25,7 @@
             app:destination="@id/mapFragment">
             <argument
                 android:name="city_model"
-                app:argType="com.backbase.domain.model.CityModel"
+                app:argType="com.backbase.domain.model.CityDomainModel"
                 app:nullable="false" />
         </action>
     </fragment>
@@ -36,7 +36,7 @@
         android:label="MapFragment" >
         <argument
             android:name="city_model"
-            app:argType="com.backbase.domain.model.CityModel"
+            app:argType="com.backbase.domain.model.CityDomainModel"
             app:nullable="false" />
     </fragment>
 </navigation>
