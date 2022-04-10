@@ -45,7 +45,7 @@ class DataRepositoryImpl(
         }
     }
 
-    override suspend fun insertData(list: List<CityDomainModel>) {
+    private fun insertData(list: List<CityDomainModel>) {
         initialList = list
     }
 
