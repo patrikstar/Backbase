@@ -11,6 +11,9 @@ import com.backbase.domain.model.CityDomainModel
 import com.backbase.ui.base.BaseFragment
 import com.backbase.ui.search.model.ListViewState
 import com.backbase.ui.search.recycler.ListAdapter
+import com.backbase.ui.utils.extensions.hideKeyboardOnFocusLost
+import com.backbase.ui.utils.extensions.onImeDone
+import com.backbase.ui.utils.textwatcher.SimpleTextWatcher
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +24,11 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.etSearch.apply {
+            addTextChangedListener(SimpleTextWatcher(viewModel::onUserTyped))
+            hideKeyboardOnFocusLost()
+            onImeDone { clearFocus() }
+        }
         binding.rvList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = listAdapter

@@ -16,4 +16,8 @@ class SearchViewModel(
             listLiveData.postValue(ListViewState.Success(dataRepository.getInitialList()))
         }
     }
+
+    fun onUserTyped(query: String) {
+
+    }
 }
