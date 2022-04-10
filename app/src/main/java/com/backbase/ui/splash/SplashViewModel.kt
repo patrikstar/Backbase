@@ -19,14 +19,18 @@ class SplashViewModel(
 
     private fun getCitiesFromRaw() {
         viewModelScope.launch {
-            withContext(Dispatchers.Default) {
-                splashLiveData.postValue(
-                    if (domainRepository.parseAndSaveData()) {
-                        SplashViewState.Success
-                    } else {
-                        SplashViewState.Error
-                    }
-                )
+            try {
+                withContext(Dispatchers.Default) {
+                    splashLiveData.postValue(
+                        if (domainRepository.parseAndSaveData()) {
+                            SplashViewState.Success
+                        } else {
+                            SplashViewState.Error
+                        }
+                    )
+                }
+            } catch (e: Exception) {
+                splashLiveData.postValue(SplashViewState.Error)
             }
         }
     }

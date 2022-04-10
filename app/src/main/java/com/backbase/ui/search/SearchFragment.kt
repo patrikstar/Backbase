@@ -49,7 +49,7 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
 
     private fun handleViewState(state: ListViewState) = when (state) {
         is ListViewState.Success -> showCities(state.cities)
-        ListViewState.Error -> showErrorState()
+        is ListViewState.Message -> showMessage(state)
         ListViewState.Loading -> showLoadingState()
     }
 
@@ -61,9 +61,10 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
         listAdapter.items = items.toMutableList()
     }
 
-    private fun showErrorState() = with(binding) {
+    private fun showMessage(state: ListViewState.Message) = with(binding) {
         rvList.isVisible = false
         pbList.isVisible = false
+        tvListError.text = getString(state.message.messageId)
         tvListError.isVisible = true
     }
 
