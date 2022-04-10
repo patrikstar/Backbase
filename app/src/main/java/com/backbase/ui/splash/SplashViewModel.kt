@@ -1,14 +1,14 @@
 package com.backbase.ui.splash
 
 import androidx.lifecycle.*
-import com.backbase.data.repository.DataRepository
+import com.backbase.domain.repository.DomainRepository
 import com.backbase.ui.splash.model.SplashViewState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SplashViewModel(
-    private val dataRepository: DataRepository
+    private val domainRepository: DomainRepository
 ) : ViewModel() {
 
     val splashLiveData = MutableLiveData<SplashViewState>()
@@ -21,7 +21,7 @@ class SplashViewModel(
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 splashLiveData.postValue(
-                    if (dataRepository.parseAndSaveData()) {
+                    if (domainRepository.parseAndSaveData()) {
                         SplashViewState.Success
                     } else {
                         SplashViewState.Error

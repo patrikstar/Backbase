@@ -7,5 +7,4 @@ interface DataRepository {
     suspend fun parseAndSaveData(): Boolean
 
     fun getInitialList(): List<CityDomainModel>
-
 }

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CityModel(
+data class CityDataModel(
     @SerialName("country")
     val country: String,
     @SerialName("name")

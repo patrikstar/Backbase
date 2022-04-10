@@ -1,7 +1,7 @@
 package com.backbase.data.parser
 
 import android.content.Context
-import com.backbase.data.model.CityModel
+import com.backbase.data.model.CityDataModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -16,7 +16,7 @@ class JsonParserImpl(
     private val json: Json,
 ) : JsonParser {
 
-    override fun parseJson(): List<CityModel> =
+    override fun parseJson(): List<CityDataModel> =
         try {
             context.assets.open(JSON_FILE_NAME).use { inputStream ->
                 json.decodeFromStream(inputStream)

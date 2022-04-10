@@ -1,19 +1,19 @@
 package com.backbase.ui.search
 
 import androidx.lifecycle.*
-import com.backbase.data.repository.DataRepository
+import com.backbase.domain.repository.DomainRepository
 import com.backbase.ui.search.model.ListViewState
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val dataRepository: DataRepository
+    private val domainRepository: DomainRepository
 ) : ViewModel() {
     val listLiveData = MutableLiveData<ListViewState>()
     private val searchQuery = MutableLiveData<String>()
 
     init {
         viewModelScope.launch {
-            listLiveData.postValue(ListViewState.Success(dataRepository.getInitialList()))
+            listLiveData.postValue(ListViewState.Success(domainRepository.fetchData()))
         }
     }
 
