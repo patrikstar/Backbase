@@ -10,5 +10,5 @@ import org.koin.dsl.module
 val dataModule = module {
     single { Json { ignoreUnknownKeys = true } }
     single<JsonParser> { JsonParserImpl(get(), get()) }
-    single<DataRepository> { DataRepositoryImpl() }
+    single<DataRepository> { DataRepositoryImpl(get()) }
 }
