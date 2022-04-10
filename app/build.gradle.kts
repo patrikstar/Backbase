@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -74,7 +75,7 @@ dependencies {
     implementation(Libs.constraintLayout)
     implementation(Libs.materialDialog)
 
-    implementation(Libs.gson)
+    implementation(Libs.kotlin_serialization)
 
     implementation(Libs.coroutines)
     implementation(Libs.coroutines_core)

@@ -1,25 +1,24 @@
 package com.backbase.data.model
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Parcelize
+@Serializable
 data class CityModel(
-    @SerializedName("country")
+    @SerialName("country")
     val country: String,
-    @SerializedName("name")
+    @SerialName("name")
     val name: String,
-    @SerializedName("_id")
+    @SerialName("_id")
     val id: Int,
-    @SerializedName("coord")
+    @SerialName("coord")
     val coordinates: CityCoordinates
-) : Parcelable
+)
 
-@Parcelize
+@Serializable
 data class CityCoordinates(
-    @SerializedName("lon")
+    @SerialName("lon")
     val lon: Float,
-    @SerializedName("lat")
+    @SerialName("lat")
     val lat: Float
-) : Parcelable
+)

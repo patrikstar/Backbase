@@ -2,22 +2,22 @@ package com.backbase.ui.splash
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.backbase.R
 import com.backbase.data.model.CityModel
 import com.backbase.data.repository.DataRepository
 import com.backbase.domain.model.CityDomainModel
 import com.backbase.ui.splash.model.SplashViewState
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import timber.log.Timber
 import java.io.IOException
 
 class SplashViewModel(
     app: Application,
-    private val gson: Gson,
+    private val json: Json,
     private val dataRepository: DataRepository
 ) : AndroidViewModel(app) {
 
@@ -37,30 +37,26 @@ class SplashViewModel(
         }
     }
 
+    @Suppress("BlockingMethodInNonBlockingContext")
+    @OptIn(ExperimentalSerializationApi::class)
     private suspend fun getJsonFile() = withContext(Dispatchers.Default) {
-        val jsonString: String? = try {
-            getApplication<Application>().resources?.openRawResource(R.raw.cities)?.bufferedReader()
-                .use { it?.readText() }
+        val parsedList: List<CityModel> = try {
+            getApplication<Application>().assets.open("cities.json").use { inputStream ->
+                json.decodeFromStream(inputStream)
+            }
         } catch (ioException: IOException) {
             Timber.e("Get Json file from raw failed!")
-            null
+            emptyList()
         }
-        if (jsonString == null) {
+        if (parsedList.isEmpty()) {
             splashLiveData.postValue(SplashViewState.Error)
         } else {
-            parseList(jsonString)
+            parseList(parsedList)
         }
     }
 
-    private suspend fun parseList(rawData: String) = withContext(Dispatchers.Default) {
-        val typeToken = object : TypeToken<List<CityModel>>() {}.type
-        val data: List<CityModel> = try {
-            gson.fromJson(rawData, typeToken)
-        } catch (e: Exception) {
-            Timber.e("Map Json error!")
-            emptyList()
-        }
-        val mappedCities = data.map {
+    private suspend fun parseList(rawData: List<CityModel>) = withContext(Dispatchers.Default) {
+        val mappedCities = rawData.map {
             CityDomainModel(
                 id = it.id,
                 name = it.name,
@@ -75,12 +71,6 @@ class SplashViewModel(
             mappedCities.sortedWith(compareBy({ it.nameLowercase }, { it.country }))
 
         dataRepository.insertData(sortedList)
-        splashLiveData.postValue(
-            if (data.isEmpty()) {
-                SplashViewState.Error
-            } else {
-                SplashViewState.Success
-            }
-        )
+        splashLiveData.postValue(SplashViewState.Success)
     }
 }

@@ -26,7 +26,7 @@ object Libs {
 
     const val koin_android = "io.insert-koin:koin-android:3.1.5"
 
-    const val gson = "com.google.code.gson:gson:2.8.6"
+    const val kotlin_serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
     object Kotlin {
         const val version = "1.6.10"
