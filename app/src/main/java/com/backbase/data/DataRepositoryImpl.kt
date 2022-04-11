@@ -15,6 +15,9 @@ class DataRepositoryImpl(
 
     private var initialList: List<CityDomainModel> = emptyList()
 
+    /**
+     * List is parsed from json file with parser
+     **/
     override suspend fun parseAndSaveData(): Boolean {
         return withContext(Dispatchers.Default) {
             val parsedList: List<CityDataModel> = parser.parseJson()
@@ -27,6 +30,9 @@ class DataRepositoryImpl(
         }
     }
 
+    /**
+     * List is mapped to domain model and initially sorted
+     **/
     private suspend fun mapAndSaveList(rawData: List<CityDataModel>) {
         withContext(Dispatchers.Default) {
             val mappedCities = mapper.map(rawData)
@@ -46,5 +52,8 @@ class DataRepositoryImpl(
         initialList = list
     }
 
+    /**
+     * Returns mapped and initially sorted initial list
+     **/
     override fun getInitialList(): List<CityDomainModel> = initialList
 }
