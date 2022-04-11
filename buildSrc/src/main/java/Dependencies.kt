@@ -54,10 +54,12 @@ object Libs {
     object Test {
         const val mockkVersion = "1.11.0"
         const val mockk = "io.mockk:mockk:$mockkVersion"
-        const val mockk2 = "io.mockk:mockk-agent-jvm:$mockkVersion"
         const val mockk_android = "io.mockk:mockk-android:$mockkVersion"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
-        const val junit4 = "junit:junit:4.12"
+        const val mockito = "org.mockito:mockito-core:3.6.0"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+        const val junit4 = "junit:junit:4.13.2"
+        const val arch_core = "androidx.arch.core:core-testing:2.1.0"
+        const val androidx_junit = "androidx.test.ext:junit:1.1.3"
         const val espresso = "com.android.support.test.espresso:espresso-core:3.0.2"
     }
 

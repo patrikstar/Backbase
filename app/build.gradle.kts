@@ -89,10 +89,13 @@ dependencies {
     implementation(Libs.Navigation.fragment_ktx)
     implementation(Libs.Navigation.ui_ktx)
 
+    testImplementation(kotlin("test"))
     testImplementation(Libs.Test.junit4)
     testImplementation(Libs.Test.mockk)
     testImplementation(Libs.Test.coroutines)
+    testImplementation(Libs.Test.arch_core)
+    testImplementation(Libs.Test.mockito)
     androidTestImplementation(Libs.Test.mockk_android)
-    androidTestImplementation(Libs.Test.junit4)
+    androidTestImplementation(Libs.Test.androidx_junit)
     androidTestImplementation(Libs.Test.espresso)
 }
