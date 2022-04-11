@@ -21,7 +21,7 @@ fun List<CityDomainModel>.customFilter(query: String): List<CityDomainModel> {
     return result
 }
 
-private fun findMatchedItem(
+fun findMatchedItem(
     list: List<CityDomainModel>,
     query: String,
     left: Int,
