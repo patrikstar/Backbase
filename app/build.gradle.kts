@@ -2,7 +2,10 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -41,6 +44,10 @@ android {
         }
     }
 
+    lint {
+        isAbortOnError = false
+    }
+
     buildFeatures {
         viewBinding = true
     }
@@ -68,8 +75,9 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
     implementation(Libs.materialDialog)
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
 
-    implementation(Libs.gson)
+    implementation(Libs.kotlin_serialization)
 
     implementation(Libs.coroutines)
     implementation(Libs.coroutines_core)
@@ -77,6 +85,9 @@ dependencies {
     implementation(Libs.koin_android)
 
     implementation(Libs.timber)
+
+    implementation(Libs.Navigation.fragment_ktx)
+    implementation(Libs.Navigation.ui_ktx)
 
     testImplementation(Libs.Test.junit4)
     testImplementation(Libs.Test.mockk)

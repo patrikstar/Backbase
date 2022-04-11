@@ -6,7 +6,7 @@ object AppVersion {
 }
 
 object AndroidSdk {
-    const val min = 16
+    const val min = 21
     const val compile = 31
     const val target = compile
     const val buildTools = "31.0.0"
@@ -26,7 +26,7 @@ object Libs {
 
     const val koin_android = "io.insert-koin:koin-android:3.1.5"
 
-    const val gson = "com.google.code.gson:gson:2.8.6"
+    const val kotlin_serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
     object Kotlin {
         const val version = "1.6.10"
@@ -39,6 +39,12 @@ object Libs {
         const val common = "androidx.lifecycle:lifecycle-common-java8:$version"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+    }
+
+    object Navigation {
+        const val version = "2.4.1"
+        const val fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$version"
+        const val ui_ktx = "androidx.navigation:navigation-ui-ktx:$version"
     }
 
     const val material = "com.google.android.material:material:1.2.1"

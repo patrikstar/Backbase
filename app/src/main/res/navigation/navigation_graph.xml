@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.backbase.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_go_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.backbase.ui.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_go_to_mapFragment"
+            app:destination="@id/mapFragment">
+            <argument
+                android:name="city_model"
+                app:argType="com.backbase.domain.model.CityDomainModel"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.backbase.ui.map.MapFragment"
+        android:label="MapFragment" >
+        <argument
+            android:name="city_model"
+            app:argType="com.backbase.domain.model.CityDomainModel"
+            app:nullable="false" />
+    </fragment>
+</navigation>
