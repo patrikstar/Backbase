@@ -2,14 +2,16 @@ package com.backbase.data.repository
 
 import com.backbase.data.mapper.CityDataToDomainMapper
 import com.backbase.data.model.CityDataModel
-import com.backbase.data.parser.JsonParser
+import com.backbase.data.parser.AssetsJsonParser
 import com.backbase.domain.model.CityDomainModel
 import com.backbase.domain.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+private const val JSON_FILE_NAME = "cities.json"
+
 class DataRepositoryImpl(
-    private val parser: JsonParser,
+    private val assetsJsonParser: AssetsJsonParser,
     private val mapper: CityDataToDomainMapper
 ) : DataRepository {
 
@@ -17,10 +19,11 @@ class DataRepositoryImpl(
 
     /**
      * List is parsed from json file with parser
+     * @return true if parsed list is not empty, false otherwise
      **/
     override suspend fun parseAndSaveData(): Boolean {
         return withContext(Dispatchers.Default) {
-            val parsedList: List<CityDataModel> = parser.parseJson()
+            val parsedList: List<CityDataModel> = assetsJsonParser.parseJson(JSON_FILE_NAME)
             if (parsedList.isEmpty()) {
                 false
             } else {

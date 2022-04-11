@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 @ExperimentalCoroutinesApi
 class DomainRepositoryImplTest {
@@ -18,7 +19,7 @@ class DomainRepositoryImplTest {
     private val repository = DomainRepositoryImpl(dataRepository)
 
     @Test
-    fun `should return false when data repository returns false`() = runTest {
+    fun `should return false when call parseAndSaveData() and dataRepository returns false`() = runTest {
         // given
         coEvery { dataRepository.parseAndSaveData() } returns false
 
@@ -30,7 +31,7 @@ class DomainRepositoryImplTest {
     }
 
     @Test
-    fun `should return true when data repository parseAndSaveData() returns true`() = runTest {
+    fun `should return true when call parseAndSaveData() and dataRepository returns true`() = runTest {
         // given
         coEvery { dataRepository.parseAndSaveData() } returns true
 
@@ -42,7 +43,7 @@ class DomainRepositoryImplTest {
     }
 
     @Test
-    fun `should post initial list when fetchData()`() = runTest {
+    fun `should post initial list when call fetchData()`() = runTest {
         // given
         coEvery { dataRepository.getInitialList() } returns getCityDomainModelList()
 
@@ -56,13 +57,13 @@ class DomainRepositoryImplTest {
     }
 
     @Test
-    fun `should post initial list when searchWithKey() with empty key`() = runTest {
+    fun `should post initial list when call searchWithKey() with empty key`() = runTest {
         // given
         coEvery { dataRepository.getInitialList() } returns getCityDomainModelList()
-
-        // when
         repository.fetchData()
         repository.searchWithKey("")
+
+        // when
         val initialList = dataRepository.getInitialList()
         val result = repository.searchResultFlow().first()
 
@@ -71,13 +72,13 @@ class DomainRepositoryImplTest {
     }
 
     @Test
-    fun `should post filtered list when searchWithKey() with key K`() = runTest {
+    fun `should post filtered list when call searchWithKey() with key K`() = runTest {
         // given
         coEvery { dataRepository.getInitialList() } returns getCityDomainModelList()
-
-        // when
         val key = "k"
         repository.fetchData()
+
+        // when
         repository.searchWithKey(key)
         val initialList = dataRepository.getInitialList()
         val filteredList = initialList.filter { it.name.startsWith(key, true) }
@@ -91,14 +92,29 @@ class DomainRepositoryImplTest {
     fun `should post empty list when searchWithKey() with key U`() = runTest {
         // given
         coEvery { dataRepository.getInitialList() } returns getCityDomainModelList()
-
-        // when
         val key = "U" // there is no items that starts with "U" in initialList
         repository.fetchData()
+
+        // when
         repository.searchWithKey(key)
         val result = repository.searchResultFlow().first()
 
         // then
         assertEquals(emptyList(), result)
+    }
+
+    @Test
+    fun `should not post empty list when searchWithKey() found some items`() = runTest {
+        // given
+        coEvery { dataRepository.getInitialList() } returns getCityDomainModelList()
+        val key = "K"
+        repository.fetchData()
+
+        // when
+        repository.searchWithKey(key)
+        val result = repository.searchResultFlow().first()
+
+        // then
+        assertFalse(result.isEmpty())
     }
 }

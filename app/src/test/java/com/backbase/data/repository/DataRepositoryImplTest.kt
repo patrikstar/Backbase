@@ -2,7 +2,7 @@ package com.backbase.data.repository
 
 import com.backbase.common.getCitiDataModelList
 import com.backbase.data.mapper.CityDataToDomainMapper
-import com.backbase.data.parser.JsonParser
+import com.backbase.data.parser.AssetsJsonParser
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,15 +13,15 @@ import kotlin.test.assertEquals
 @ExperimentalCoroutinesApi
 class DataRepositoryImplTest {
 
-    private val parser: JsonParser = mockk(relaxed = true)
+    private val assetsJsonParser: AssetsJsonParser = mockk(relaxed = true)
     private val mapper = CityDataToDomainMapper()
 
-    private val repository = DataRepositoryImpl(parser, mapper)
+    private val repository = DataRepositoryImpl(assetsJsonParser, mapper)
 
     @Test
-    fun `should return true when parsed list is not empty`() = runTest {
+    fun `should return true when call parseAndSaveData and parsed list is not empty`() = runTest {
         // given
-        every { parser.parseJson() } returns getCitiDataModelList()
+        every { assetsJsonParser.parseJson(any()) } returns getCitiDataModelList()
 
         // when
         val result = repository.parseAndSaveData()
@@ -31,9 +31,9 @@ class DataRepositoryImplTest {
     }
 
     @Test
-    fun `should return false when parsed list is empty`() = runTest {
+    fun `should return false when call parseAndSaveData and parsed list is empty`() = runTest {
         // given
-        every { parser.parseJson() } returns emptyList()
+        every { assetsJsonParser.parseJson(any()) } returns emptyList()
 
         // when
         val result = repository.parseAndSaveData()
@@ -45,7 +45,7 @@ class DataRepositoryImplTest {
     @Test
     fun `should return sorted initialList when getInitialList()`() = runTest {
         // given
-        every { parser.parseJson() } returns getCitiDataModelList()
+        every { assetsJsonParser.parseJson(any()) } returns getCitiDataModelList()
         val mappedList = mapper.map(getCitiDataModelList())
         val sortedList = mappedList.sortedWith(
             compareBy(
