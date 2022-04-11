@@ -11,7 +11,8 @@ class SplashViewModel(
     private val domainRepository: DomainRepository
 ) : ViewModel() {
 
-    val splashLiveData = MutableLiveData<SplashViewState>()
+    private val _splashLiveData = MutableLiveData<SplashViewState>()
+    val splashLiveData: LiveData<SplashViewState> = _splashLiveData
 
     init {
         getCitiesFromRaw()
@@ -21,7 +22,7 @@ class SplashViewModel(
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.Default) {
-                    splashLiveData.postValue(
+                    _splashLiveData.postValue(
                         if (domainRepository.parseAndSaveData()) {
                             SplashViewState.Success
                         } else {
@@ -30,7 +31,7 @@ class SplashViewModel(
                     )
                 }
             } catch (e: Exception) {
-                splashLiveData.postValue(SplashViewState.Error)
+                _splashLiveData.postValue(SplashViewState.Error)
             }
         }
     }

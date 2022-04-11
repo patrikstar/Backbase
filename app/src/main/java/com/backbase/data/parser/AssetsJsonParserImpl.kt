@@ -8,17 +8,15 @@ import kotlinx.serialization.json.decodeFromStream
 import timber.log.Timber
 import java.lang.Exception
 
-private const val JSON_FILE_NAME = "cities.json"
-
 @OptIn(ExperimentalSerializationApi::class)
-class JsonParserImpl(
+class AssetsJsonParserImpl(
     private val context: Context,
     private val json: Json,
-) : JsonParser {
+) : AssetsJsonParser {
 
-    override fun parseJson(): List<CityDataModel> =
+    override fun parseJson(fileName: String): List<CityDataModel> =
         try {
-            context.assets.open(JSON_FILE_NAME).use { inputStream ->
+            context.assets.open(fileName).use { inputStream ->
                 json.decodeFromStream(inputStream)
             }
         } catch (e: Exception) {

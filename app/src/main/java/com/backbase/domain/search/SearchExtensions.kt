@@ -1,4 +1,4 @@
-package com.backbase.utils.search
+package com.backbase.domain.search
 
 import com.backbase.domain.model.CityDomainModel
 
@@ -7,7 +7,7 @@ import com.backbase.domain.model.CityDomainModel
  * binary search for find first matching element in list
  * linear matcher for add all matched items to result list
  **/
-suspend fun List<CityDomainModel>.customFilter(query: String): List<CityDomainModel> {
+fun List<CityDomainModel>.customFilter(query: String): List<CityDomainModel> {
     val result: ArrayList<CityDomainModel> = ArrayList()
     var start = findMatchedItem(this, query.lowercase(), 0, this.lastIndex, this.lastIndex.ushr(1))
 
@@ -21,7 +21,7 @@ suspend fun List<CityDomainModel>.customFilter(query: String): List<CityDomainMo
     return result
 }
 
-suspend fun findMatchedItem(
+private fun findMatchedItem(
     list: List<CityDomainModel>,
     query: String,
     left: Int,

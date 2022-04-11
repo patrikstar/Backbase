@@ -20,9 +20,9 @@ class SplashFragment : BaseFragment<SplashFragmentBinding>(SplashFragmentBinding
     }
 
     private fun observeViewModel() {
-        viewModel.splashLiveData.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.splashLiveData.observe(viewLifecycleOwner) { state ->
             handleSplashViewState(state)
-        })
+        }
     }
 
     private fun handleSplashViewState(state: SplashViewState) = when (state) {

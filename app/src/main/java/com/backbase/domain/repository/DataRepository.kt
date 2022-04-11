@@ -1,4 +1,4 @@
-package com.backbase.data.repository
+package com.backbase.domain.repository
 
 import com.backbase.domain.model.CityDomainModel
 
