@@ -5,6 +5,7 @@ plugins {
     id("kotlinx-serialization")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -74,6 +75,7 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
     implementation(Libs.materialDialog)
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
 
     implementation(Libs.kotlin_serialization)
 
