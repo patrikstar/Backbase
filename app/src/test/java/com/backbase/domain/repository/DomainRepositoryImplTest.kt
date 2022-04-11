@@ -1,7 +1,6 @@
 package com.backbase.domain.repository
 
 import com.backbase.common.getCityDomainModelList
-import com.backbase.data.repository.DataRepository
 import com.backbase.domain.DomainRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.mockk

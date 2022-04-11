@@ -1,7 +1,6 @@
 package com.backbase.data.repository
 
 import com.backbase.common.getCitiDataModelList
-import com.backbase.data.DataRepositoryImpl
 import com.backbase.data.mapper.CityDataToDomainMapper
 import com.backbase.data.parser.JsonParser
 import io.mockk.every

@@ -1,9 +1,9 @@
 package com.backbase.domain
 
-import com.backbase.data.repository.DataRepository
+import com.backbase.domain.repository.DataRepository
 import com.backbase.domain.model.CityDomainModel
 import com.backbase.domain.repository.DomainRepository
-import com.backbase.utils.search.customFilter
+import com.backbase.domain.search.customFilter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow

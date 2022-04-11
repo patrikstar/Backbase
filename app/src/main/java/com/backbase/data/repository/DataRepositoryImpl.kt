@@ -1,10 +1,10 @@
-package com.backbase.data
+package com.backbase.data.repository
 
 import com.backbase.data.mapper.CityDataToDomainMapper
 import com.backbase.data.model.CityDataModel
 import com.backbase.data.parser.JsonParser
-import com.backbase.data.repository.DataRepository
 import com.backbase.domain.model.CityDomainModel
+import com.backbase.domain.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
