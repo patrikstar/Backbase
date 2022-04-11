@@ -42,9 +42,9 @@ class SearchFragment : BaseFragment<SearchFragmentBinding>(SearchFragmentBinding
     }
 
     private fun observeViewModel() {
-        viewModel.listLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.listLiveData.observe(viewLifecycleOwner) {
             handleViewState(it)
-        })
+        }
     }
 
     private fun handleViewState(state: ListViewState) = when (state) {

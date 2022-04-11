@@ -13,23 +13,25 @@ import kotlinx.coroutines.flow.collect
 class SearchViewModel(
     private val domainRepository: DomainRepository
 ) : ViewModel() {
-    val listLiveData = MutableLiveData<ListViewState>()
+    private val _listLiveData = MutableLiveData<ListViewState>()
+    val listLiveData: LiveData<ListViewState> = _listLiveData
+
     private var searchJob: Job? = null
 
     init {
-        listLiveData.value = ListViewState.Loading
+        _listLiveData.value = ListViewState.Loading
         viewModelScope.launch {
             try {
                 domainRepository.fetchData()
                 domainRepository.searchResultFlow().collect { list ->
                     if (list.isEmpty()) {
-                        listLiveData.postValue(ListViewState.Message(MessageText.EMPTY))
+                        _listLiveData.postValue(ListViewState.Message(MessageText.EMPTY))
                     } else {
-                        listLiveData.postValue(ListViewState.Success(list))
+                        _listLiveData.postValue(ListViewState.Success(list))
                     }
                 }
             } catch (e: Exception) {
-                listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
+                _listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
             }
         }
     }
@@ -40,7 +42,7 @@ class SearchViewModel(
             try {
                 domainRepository.searchWithKey(query)
             } catch (e: Exception) {
-                listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
+                _listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
             }
         }
     }
