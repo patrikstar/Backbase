@@ -48,7 +48,6 @@ class DomainRepositoryImpl(
         if (key.isEmpty()) {
             resultFlow.value = initialList
         } else {
-            ensureActive()
             Timber.d("START: ${System.currentTimeMillis()} | key: $key")
 //            val filteredList =
 //                initialList.filter { it.name.startsWith(key, true) } // linear filter to compare
