@@ -36,19 +36,17 @@ class DataRepositoryImpl(
     /**
      * List is mapped to domain model and initially sorted
      **/
-    private suspend fun mapAndSaveList(rawData: List<CityDataModel>) {
-        withContext(Dispatchers.Default) {
-            val mappedCities = mapper.map(rawData)
+    private fun mapAndSaveList(rawData: List<CityDataModel>) {
+        val mappedCities = mapper.map(rawData)
 
-            val sortedList = mappedCities.sortedWith(
-                compareBy(
-                    { it.nameLowercase },
-                    { it.country }
-                )
+        val sortedList = mappedCities.sortedWith(
+            compareBy(
+                { it.nameLowercase },
+                { it.country }
             )
+        )
 
-            insertData(sortedList)
-        }
+        insertData(sortedList)
     }
 
     private fun insertData(list: List<CityDomainModel>) {
