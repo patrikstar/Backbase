@@ -8,6 +8,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlin.coroutines.cancellation.CancellationException
 
 @OptIn(InternalCoroutinesApi::class)
 class SearchViewModel(
@@ -42,7 +43,9 @@ class SearchViewModel(
             try {
                 domainRepository.searchWithKey(query)
             } catch (e: Exception) {
-                _listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
+                if (e !is CancellationException) {
+                    _listLiveData.postValue(ListViewState.Message(MessageText.ERROR))
+                }
             }
         }
     }
