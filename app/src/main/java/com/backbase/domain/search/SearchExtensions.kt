@@ -53,7 +53,11 @@ private fun compareItem(
     index: Int
 ): Int {
     val currentMatch = city.name.startsWith(query, ignoreCase = true)
-    val previousMatch = list[index - 1].name.startsWith(query, ignoreCase = true)
+    val previousMatch = if (index == 0) {
+        false
+    } else {
+        list[index - 1].name.startsWith(query, ignoreCase = true)
+    }
 
     return if (currentMatch) {
         if (previousMatch.not()) {
